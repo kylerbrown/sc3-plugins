@@ -1,0 +1,51 @@
+class:: SyrinxL
+summary:: Syrinx dynamical system
+categories:: UGens>Generators
+description::
+A dynamical system describing the vibration of the zebra finch vocal organ (the syrinx). The system is composed of two ordinatry differential equations:
+code::
+x' = y
+y' = -a*g^2 - b*g^2*x - g^2*x^3 - g*x^2*y + g^2*x^2 - g*x*y
+::
+Where A is pressure from the air sac (diaphram) and B is the tension of the vocal folds. G is a time constant.
+
+warning:: revise formulae converted to c like code (x', y'!!!) ::
+The time step amount code::h:: determines the rate at which the ODE is evaluated. Higher values will increase the rate, but cause more instability. A safe choice is the default amount of 0.05.
+classmethods::
+method:: ar
+argument:: freq
+Iteration frequency in Hertz
+argument:: a
+Equation variable pressure
+argument:: b
+Equation variable tension
+argument:: g
+Equation variable time constant
+argument:: h
+Integration time step
+argument:: xi
+Initial value of x
+argument:: yi
+Initial value of y
+argument:: mul
+argument:: add
+examples::
+code::
+// vary frequency
+{ LorenzL.ar(MouseX.kr(20, SampleRate.ir)) * 0.3 }.play(s);
+::
+code::
+// randomly modulate params
+(
+{ LorenzL.ar(
+SampleRate.ir,
+LFNoise0.kr(1, 2, 10),
+LFNoise0.kr(1, 20, 38),
+LFNoise0.kr(1, 1.5, 2)
+) * 0.2 }.play(s);
+)
+::
+code::
+// as a frequency control
+{ SinOsc.ar(Lag.ar(LorenzL.ar(MouseX.kr(1, 200)),3e-3)*800+900)*0.4 }.play(s);
+::

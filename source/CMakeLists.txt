@@ -94,7 +94,6 @@ set(PLUGIN_DIRS
     DistortionUGens
     DWGUGens
     GlitchUGens
-    JoshUGens
     LoopBufUGens
     MCLDUGens
     MdaUGens
@@ -104,6 +103,7 @@ set(PLUGIN_DIRS
     SkUGens
     SLUGens
     SummerUGens
+    SyrinxUGens
     TagSystemUGens
     VBAPUGens
     VOSIMUGens
